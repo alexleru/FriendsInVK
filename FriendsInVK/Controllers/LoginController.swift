@@ -17,6 +17,7 @@ class LoginController: UIViewController {
     //MARK: - ControllerLifeCicle
     override func viewDidLoad() {
         super.viewDidLoad()
+        NetworkService().request()
     }
     //MARK: - Actions
     @IBAction func loginButton(_ sender: Any) {

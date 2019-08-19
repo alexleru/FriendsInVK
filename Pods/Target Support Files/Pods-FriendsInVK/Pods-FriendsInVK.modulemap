@@ -1,0 +1,6 @@
+framework module Pods_FriendsInVK {
+  umbrella header "Pods-FriendsInVK-umbrella.h"
+
+  export *
+  module * { export * }
+}
