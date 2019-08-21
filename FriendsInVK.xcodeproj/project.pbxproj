@@ -19,6 +19,7 @@
 		2D1B1DAA2305B3FC0038C4D2 /* ProfileOfFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1B1DA92305B3FC0038C4D2 /* ProfileOfFriendCell.swift */; };
 		2D1B1DAD2306A5D50038C4D2 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1B1DAC2306A5D50038C4D2 /* Session.swift */; };
 		2D1B1DAF230A9F040038C4D2 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1B1DAE230A9F040038C4D2 /* NetworkService.swift */; };
+		2D1B1DB1230AE4ED0038C4D2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D1B1DB0230AE4ED0038C4D2 /* WebKit.framework */; };
 		2D93E5C122FF2B6D00521435 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D93E5C022FF2B6D00521435 /* AppDelegate.swift */; };
 		2D93E5C622FF2B6D00521435 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D93E5C422FF2B6D00521435 /* Main.storyboard */; };
 		2D93E5C822FF2B6F00521435 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D93E5C722FF2B6F00521435 /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 		2D1B1DA92305B3FC0038C4D2 /* ProfileOfFriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOfFriendCell.swift; sourceTree = "<group>"; };
 		2D1B1DAC2306A5D50038C4D2 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		2D1B1DAE230A9F040038C4D2 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		2D1B1DB0230AE4ED0038C4D2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		2D93E5BD22FF2B6D00521435 /* FriendsInVK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FriendsInVK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D93E5C022FF2B6D00521435 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2D93E5C522FF2B6D00521435 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -57,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D1B1DB1230AE4ED0038C4D2 /* WebKit.framework in Frameworks */,
 				A59F5190F38BABB5AB4DBD09 /* Pods_FriendsInVK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,6 +137,7 @@
 		878451CA2D49DF35A0AD652D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2D1B1DB0230AE4ED0038C4D2 /* WebKit.framework */,
 				06F4F59CB7B98C8AE5015896 /* Pods_FriendsInVK.framework */,
 			);
 			name = Frameworks;
