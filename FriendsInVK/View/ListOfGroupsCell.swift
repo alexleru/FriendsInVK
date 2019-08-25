@@ -10,6 +10,8 @@ import UIKit
 
 class ListOfGroupsCell: UITableViewCell {
 
+    @IBOutlet weak var listOfGroupsNameLabel: UILabel!
+    @IBOutlet weak var listOfGroupsDescLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

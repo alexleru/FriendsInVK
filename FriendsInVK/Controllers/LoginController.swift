@@ -61,12 +61,9 @@ extension LoginController: WKNavigationDelegate {
                 return dict
         }
         
-        print("++++++++++++++++++++++++++++++++")
-        print(params)
-        print("++++++++++++++++++++++++++++++++")
-        
         guard let token = params["access_token"],
             let userIdString = params["user_id"],
+            let stateParam = params["state"],
             let userId = Int(userIdString) else {
                 decisionHandler(.allow)
                 return
@@ -74,10 +71,13 @@ extension LoginController: WKNavigationDelegate {
         
         Session.instance.token = token
         Session.instance.userId = userId
-        NetworkService().loadFriends()
-        NetworkService().loadGroups()
-        NetworkService().searchGrpups(for: "Ice Cream")
-        NetworkService().loadPhotos()
+        
+        if(state == stateParam) {
+            performSegue(withIdentifier: "LoginSegue", sender: "self")
+        }
+        //NetworkService().loadGroups()
+        //NetworkService().searchGrpups(for: "Ice Cream")
+        //NetworkService().loadPhotos()
         
         decisionHandler(.cancel)
     }

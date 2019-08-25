@@ -9,7 +9,10 @@
 import UIKit
 
 class ListOfFriendsCell: UITableViewCell {
-
+    
+    @IBOutlet weak var listOfFriendsLabel: UILabel!
+    @IBOutlet weak var listOfFriendsImage: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
