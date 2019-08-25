@@ -7,26 +7,35 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ListOfFriendsController: UITableViewController {
 
+    //MARK: - constants
+    private let networkService = NetworkService();
+    private var friends = [Friend]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        NetworkService().loadFriends()
+        networkService.loadFriends() {[weak self] friends in
+            self?.friends = friends
+            self?.tableView.reloadData()
+        }
     }
 
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 10
+        return friends.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ListOfFriendsCell", for: indexPath) as? ListOfFriendsCell else {fatalError("Problem with ListOfFriendsCell")}
 
-        cell.listOfFriendsLabel.text = "ddddddddddddddddddddddddddd"
-        
+        cell.listOfFriendsLabel.text = ("\(friends[indexPath.row].firstName) \(friends[indexPath.row].lastName)")
+        let url = URL(string: friends[indexPath.row].photo)
+        cell.listOfFriendsImage.kf.setImage(with: url)
         return cell
     }
 }
