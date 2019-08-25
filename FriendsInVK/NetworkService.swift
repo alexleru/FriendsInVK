@@ -61,7 +61,7 @@ class NetworkService{
         let parameters: Parameters = [
             "access_token":token,
             "v":version,
-            "owner_id":Session.instance.userId
+            "album_id":"profile"
         ]
         AF.request(baseUrl+path+addpath, method: .get, parameters: parameters).responseJSON{response in
             print("+++++++++++++PHOTOS+++++++++")

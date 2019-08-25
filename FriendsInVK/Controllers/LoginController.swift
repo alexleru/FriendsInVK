@@ -74,10 +74,10 @@ extension LoginController: WKNavigationDelegate {
         
         Session.instance.token = token
         Session.instance.userId = userId
-        NetworkService().loadFriends()
-        NetworkService().loadGroups()
-        NetworkService().searchGrpups(for: "Ice Cream")
-        //NetworkService().loadPhotos()
+        //NetworkService().loadFriends()
+        //NetworkService().loadGroups()
+        //NetworkService().searchGrpups(for: "Ice Cream")
+        NetworkService().loadPhotos()
         
         decisionHandler(.cancel)
     }
