@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 class NetworkService{
     //https://api.vk.com/method/friends.get?v=5.101&fields=city,nickname&access_token=
@@ -18,28 +19,49 @@ class NetworkService{
     let version = 5.101
     
     //MARK: - func
-    func loadFriends(){
+    func loadFriends(completion: @escaping ([Friend]) -> Void){
         let addpath = "/friends.get"
         let parameters: Parameters = [
             "access_token":token,
             "v":version,
-            "fields":"nickname"
+            "order":"name",
+            "fields":"nickname, photo_50"
         ]
         AF.request(baseUrl+path+addpath, method: .get, parameters: parameters).responseJSON{response in
-            print("+++++++++++++FRIENDS+++++++++")
-            print(response)
+            //print("+++++++++++++FRIENDS+++++++++")
+            switch response.result{
+            case .success(let value):
+                let json = JSON(value)
+                let friendsJSON = json["response"]["items"].arrayValue
+                let friends = friendsJSON.map { Friend($0)}.filter(){$0.firstName != "DELETED"}
+                completion(friends)
+            case .failure(let error):
+                print(error)
+                completion([])
+            }
         }
     }
-    func loadGroups(){
+    func loadGroups(completion: @escaping ([Group]) -> Void){
         let addpath = "/groups.get"
         let parameters: Parameters = [
             "access_token":token,
+            "extended":1,
             "v":version,
-            "fields":"name"
+            "fields":"description"
         ]
         AF.request(baseUrl+path+addpath, method: .get, parameters: parameters).responseJSON{response in
             print("+++++++++++++GROUPS+++++++++")
             print(response)
+            switch response.result{
+            case .success(let value):
+                let json = JSON(value)
+                let groupJSON = json["response"]["items"].arrayValue
+                let groups = groupJSON.map { Group($0)}
+                completion(groups)
+            case .failure(let error):
+                print(error)
+                completion([])
+            }
         }
     }
     func searchGrpups(for search: String){

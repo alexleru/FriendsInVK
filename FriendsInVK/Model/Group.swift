@@ -7,12 +7,14 @@
 //
 
 import Foundation
+import SwiftyJSON
+
 class Group {
     let name: String
     let description: String
     
-    init(_ name: String, _ description: String) {
-        self.name = name
-        self.description = description
+    init(_ json: JSON) {
+        self.name = json["name"].stringValue
+        self.description = json["description"].stringValue
     }
 }
