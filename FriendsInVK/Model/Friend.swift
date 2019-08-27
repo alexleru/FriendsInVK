@@ -8,13 +8,21 @@
 
 import Foundation
 import SwiftyJSON
+import RealmSwift
 
-class Friend {
-    let userId: Int
-    let firstName: String
-    let lastName: String
-    let photo: String
-    init(_ json: JSON) {
+class Friend: Object {
+    @objc dynamic var userId: Int = 0
+    @objc dynamic var firstName: String = ""
+    @objc dynamic var lastName: String = ""
+    @objc dynamic var photo: String = ""
+    
+//    let userId: Int
+//    let firstName: String
+//    let lastName: String
+//    let photo: String
+
+    required convenience init(_ json: JSON) {
+        self.init()
         self.userId = json["id"].intValue
         self.firstName = json["first_name"].stringValue
         self.lastName = json["last_name"].stringValue

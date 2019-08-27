@@ -87,7 +87,6 @@ class NetworkService{
         ]
         AF.request(baseUrl+path+addpath, method: .get, parameters: parameters).responseJSON{response in
             print("+++++++++++++PHOTOS+++++++++")
-            print(response)
             switch response.result{
             case .success(let value):
                 let json = JSON(value)
