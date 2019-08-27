@@ -38,4 +38,12 @@ class ListOfFriendsController: UITableViewController {
         cell.listOfFriendsImage.kf.setImage(with: url)
         return cell
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PhotoShowSegue",
+        let destinationVC = segue.destination as? PhotosOfFriendController,
+            let indexPath = tableView.indexPathForSelectedRow{
+            destinationVC.userId = friends[indexPath.row].userId
+        }
+    }
 }
