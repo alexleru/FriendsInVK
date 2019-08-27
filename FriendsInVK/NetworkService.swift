@@ -78,16 +78,26 @@ class NetworkService{
             print(response)
         }
     }
-    func loadPhotos(){
-        let addpath = "/photos.get"
+    func loadPhotos(for userId: Int, completion: @escaping ([Photo]) -> Void){
+        let addpath = "/photos.getAll"
         let parameters: Parameters = [
             "access_token":token,
             "v":version,
-            "album_id":"profile"
+            "owner_id":userId
         ]
         AF.request(baseUrl+path+addpath, method: .get, parameters: parameters).responseJSON{response in
             print("+++++++++++++PHOTOS+++++++++")
             print(response)
+            switch response.result{
+            case .success(let value):
+                let json = JSON(value)
+                let photosJSON = json["response"]["items"].arrayValue
+                let photos = photosJSON.map { Photo($0)}
+                completion(photos)
+            case .failure(let error):
+                print(error)
+                completion([])
+            }
         }
     }
     

@@ -10,10 +10,12 @@ import Foundation
 import SwiftyJSON
 
 class Group {
+    let groupId: Int
     let name: String
     let description: String
     
     init(_ json: JSON) {
+        self.groupId = json["id"].intValue
         self.name = json["name"].stringValue
         self.description = json["description"].stringValue
     }

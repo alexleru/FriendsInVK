@@ -10,10 +10,12 @@ import Foundation
 import SwiftyJSON
 
 class Friend {
+    let userId: Int
     let firstName: String
     let lastName: String
     let photo: String
     init(_ json: JSON) {
+        self.userId = json["id"].intValue
         self.firstName = json["first_name"].stringValue
         self.lastName = json["last_name"].stringValue
         self.photo = json["photo_50"].stringValue
