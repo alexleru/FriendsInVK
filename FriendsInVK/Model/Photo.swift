@@ -8,12 +8,17 @@
 
 import Foundation
 import SwiftyJSON
+import RealmSwift
 
-class Photo {
-    let photosId: Int
-    let url: String
+class Photo: Object {
+    @objc dynamic var photosId: Int = 0
+    @objc dynamic var url: String = ""
     
-    init(_ json: JSON) {
+//    let photosId: Int
+//    let url: String
+    
+    required convenience init(_ json: JSON) {
+        self.init()
         self.photosId = json["id"].intValue
         self.url = json["sizes"][3]["url"].stringValue
     }
