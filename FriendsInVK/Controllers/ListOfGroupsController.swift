@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ListOfGroupsController: UITableViewController {
 
@@ -16,13 +17,24 @@ class ListOfGroupsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        networkService.loadGroups() {[weak self] groups in
-            self?.groups = groups
+        networkService.loadGroups() {[weak self] in
+            self?.loadDataGroups()
             self?.tableView.reloadData()
         
         }
 
     }
+    
+    func loadDataGroups(){
+        do {
+            let realm = try Realm()
+            let groups = realm.objects(Group.self)
+            self.groups = Array(groups)
+        } catch {
+            print(error)
+        }
+    }
+    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

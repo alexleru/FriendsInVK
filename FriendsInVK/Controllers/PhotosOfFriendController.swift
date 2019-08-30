@@ -8,8 +8,7 @@
 
 import UIKit
 import Kingfisher
-
-
+import RealmSwift
 
 class PhotosOfFriendController: UICollectionViewController {
 
@@ -21,10 +20,19 @@ class PhotosOfFriendController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        networkService.loadPhotos(for: userId){[weak self] photos in
-            self?.photos = photos
+        networkService.loadPhotos(for: userId){[weak self] in
+            self?.loadDataPhotos(self!.userId)
             self?.collectionView.reloadData()
+        }
+    }
+    
+    func loadDataPhotos(_ ownerId: Int){
+        do {
+            let realm = try Realm()
+            let photos = realm.objects(Photo.self).filter("ownerId = %@", ownerId)
+            self.photos = Array(photos)
+        } catch {
+            print(error)
         }
     }
     // MARK: UICollectionViewDataSource
