@@ -15,11 +15,6 @@ class Friend: Object {
     @objc dynamic var firstName: String = ""
     @objc dynamic var lastName: String = ""
     @objc dynamic var photo: String = ""
-    
-//    let userId: Int
-//    let firstName: String
-//    let lastName: String
-//    let photo: String
 
     required convenience init(_ json: JSON) {
         self.init()
@@ -28,15 +23,8 @@ class Friend: Object {
         self.lastName = json["last_name"].stringValue
         self.photo = json["photo_50"].stringValue
     }
+    
+    override static func primaryKey() -> String? {
+        return "userId"
+    }
 }
-
-//{
-//                "can_access_closed" = 1;
-//                "first_name" = Danynax;
-//                id = 11840;
-//                "is_closed" = 0;
-//                "last_name" = Pox;
-//                nickname = "";
-//                online = 1;
-//                "track_code" = "09b431b6vCUvBFMlzJUNax_UFM4drq53V10j1YCXmx0k20EEvRTRTnYzbnKczwxqGVeAC7jJzg";
-//        },

@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import RealmSwift
 
 class ListOfFriendsController: UITableViewController {
 
@@ -17,9 +18,19 @@ class ListOfFriendsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        networkService.loadFriends() {[weak self] friends in
-            self?.friends = friends
+        networkService.loadFriends() {[weak self] in
+            self?.loadDataFriends()
             self?.tableView.reloadData()
+        }
+    }
+    
+    func loadDataFriends(){
+        do {
+            let realm = try Realm()
+            let friends = realm.objects(Friend.self)
+            self.friends = Array(friends)
+        } catch {
+            print(error)
         }
     }
 

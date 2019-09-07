@@ -2,7 +2,7 @@
 //  Session.swift
 //  FriendsInVK
 //
-//  Created by Darya Bodaykina on 16/08/2019.
+//  Created by alexleru on 16/08/2019.
 //  Copyright © 2019 alexleru. All rights reserved.
 //
 

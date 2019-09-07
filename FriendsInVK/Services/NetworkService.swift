@@ -11,7 +11,6 @@ import Alamofire
 import SwiftyJSON
 
 class NetworkService{
-    //https://api.vk.com/method/friends.get?v=5.101&fields=city,nickname&access_token=
     //MARK: - constant
     let baseUrl = "https://api.vk.com"
     let path = "/method"
@@ -19,7 +18,7 @@ class NetworkService{
     let version = 5.101
     
     //MARK: - func
-    func loadFriends(completion: @escaping ([Friend]) -> Void){
+    func loadFriends(completion: @escaping () -> Void){
         let addpath = "/friends.get"
         let parameters: Parameters = [
             "access_token":token,
@@ -34,14 +33,15 @@ class NetworkService{
                 let json = JSON(value)
                 let friendsJSON = json["response"]["items"].arrayValue
                 let friends = friendsJSON.map { Friend($0)}.filter(){$0.firstName != "DELETED"}
-                completion(friends)
+                BDService().save(friends)
+                completion()
             case .failure(let error):
                 print(error)
-                completion([])
+                completion()
             }
         }
     }
-    func loadGroups(completion: @escaping ([Group]) -> Void){
+    func loadGroups(completion: @escaping () -> Void){
         let addpath = "/groups.get"
         let parameters: Parameters = [
             "access_token":token,
@@ -51,16 +51,16 @@ class NetworkService{
         ]
         AF.request(baseUrl+path+addpath, method: .get, parameters: parameters).responseJSON{response in
             print("+++++++++++++GROUPS+++++++++")
-            print(response)
             switch response.result{
             case .success(let value):
                 let json = JSON(value)
                 let groupJSON = json["response"]["items"].arrayValue
                 let groups = groupJSON.map { Group($0)}
-                completion(groups)
+                BDService().save(groups)
+                completion()
             case .failure(let error):
                 print(error)
-                completion([])
+                completion()
             }
         }
     }
@@ -78,7 +78,7 @@ class NetworkService{
             print(response)
         }
     }
-    func loadPhotos(for userId: Int, completion: @escaping ([Photo]) -> Void){
+    func loadPhotos(for userId: Int, completion: @escaping () -> Void){
         let addpath = "/photos.getAll"
         let parameters: Parameters = [
             "access_token":token,
@@ -92,10 +92,11 @@ class NetworkService{
                 let json = JSON(value)
                 let photosJSON = json["response"]["items"].arrayValue
                 let photos = photosJSON.map { Photo($0)}
-                completion(photos)
+                BDService().save(photos)
+                completion()
             case .failure(let error):
                 print(error)
-                completion([])
+                completion()
             }
         }
     }

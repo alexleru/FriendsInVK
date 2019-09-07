@@ -11,15 +11,18 @@ import SwiftyJSON
 import RealmSwift
 
 class Photo: Object {
-    @objc dynamic var photosId: Int = 0
+    @objc dynamic var photoId: Int = 0
+    @objc dynamic var ownerId: Int = 0
     @objc dynamic var url: String = ""
-    
-//    let photosId: Int
-//    let url: String
     
     required convenience init(_ json: JSON) {
         self.init()
-        self.photosId = json["id"].intValue
+        self.photoId = json["id"].intValue
+        self.ownerId = json["owner_id"].intValue
         self.url = json["sizes"][3]["url"].stringValue
+    }
+    
+    override static func primaryKey() -> String? {
+        return "photoId"
     }
 }
