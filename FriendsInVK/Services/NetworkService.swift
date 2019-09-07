@@ -16,9 +16,9 @@ class NetworkService{
     let path = "/method"
     let token = Session.instance.token
     let version = 5.101
-    
+
     //MARK: - func
-    func loadFriends(completion: @escaping () -> Void){
+    func loadFriends(){
         let addpath = "/friends.get"
         let parameters: Parameters = [
             "access_token":token,
@@ -27,21 +27,21 @@ class NetworkService{
             "fields":"nickname, photo_50"
         ]
         AF.request(baseUrl+path+addpath, method: .get, parameters: parameters).responseJSON{response in
-            //print("+++++++++++++FRIENDS+++++++++")
+            print("+++++++++++++FRIENDS+++++++++")
             switch response.result{
             case .success(let value):
+                print(value)
                 let json = JSON(value)
                 let friendsJSON = json["response"]["items"].arrayValue
                 let friends = friendsJSON.map { Friend($0)}.filter(){$0.firstName != "DELETED"}
+                print(friends)
                 BDService().save(friends)
-                completion()
             case .failure(let error):
                 print(error)
-                completion()
             }
         }
     }
-    func loadGroups(completion: @escaping () -> Void){
+    func loadGroups(){
         let addpath = "/groups.get"
         let parameters: Parameters = [
             "access_token":token,
@@ -57,10 +57,8 @@ class NetworkService{
                 let groupJSON = json["response"]["items"].arrayValue
                 let groups = groupJSON.map { Group($0)}
                 BDService().save(groups)
-                completion()
             case .failure(let error):
                 print(error)
-                completion()
             }
         }
     }
@@ -78,7 +76,7 @@ class NetworkService{
             print(response)
         }
     }
-    func loadPhotos(for userId: Int, completion: @escaping () -> Void){
+    func loadPhotos(for userId: Int){
         let addpath = "/photos.getAll"
         let parameters: Parameters = [
             "access_token":token,
@@ -93,10 +91,8 @@ class NetworkService{
                 let photosJSON = json["response"]["items"].arrayValue
                 let photos = photosJSON.map { Photo($0)}
                 BDService().save(photos)
-                completion()
             case .failure(let error):
                 print(error)
-                completion()
             }
         }
     }

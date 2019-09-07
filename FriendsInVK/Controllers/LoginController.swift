@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import RealmSwift
 
 class LoginController: UIViewController {
     //MARK: - outlets
@@ -17,7 +18,7 @@ class LoginController: UIViewController {
         }
     }
     let state = String(Int.random(in: 100000...999999))
-    
+    private let networkService = NetworkService();
     //MARK: - ControllerLifeCicle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,9 +78,6 @@ extension LoginController: WKNavigationDelegate {
         if(state == stateParam) {
             performSegue(withIdentifier: "LoginSegue", sender: "self")
         }
-        //NetworkService().loadGroups()
-        //NetworkService().searchGrpups(for: "Ice Cream")
-        //NetworkService().loadPhotos()
         
         decisionHandler(.cancel)
     }
